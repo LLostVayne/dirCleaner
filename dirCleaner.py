@@ -3,7 +3,7 @@ import os
 import time
 
 #Getting into the Downloads folder.
-os.chdir(os.environ['HOME']+'/Downloads')
+os.chdir(os.path.expanduser("~") + os.sep + "Downloads")
 
 
 #Creating lists for the file-types.
