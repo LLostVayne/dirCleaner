@@ -55,8 +55,7 @@ def Move(List,folder):
  	if moved == 0:
  		print "No items needed to be moved."
  		time.sleep(3)
- 	else:
- 		pass
+
 def Final():
 	folders = ['Vids','Pics','Sounds','Compressed','Books']
 	for i in range(len(folders)):
