@@ -1,66 +1,44 @@
-import shutil
 import os
-import time
+import shutil
 
-#Getting into the Downloads folder.
+
+def main(fileFormat, folder):
+    moved = 0
+    try:
+        os.mkdir(folder)
+    except FileExistsError:
+        pass
+    for file in os.listdir(os.getcwd()):
+        if file.endswith(tuple(fileFormat)):
+            shutil.move(file, folder)
+            moved += 1
+    if len(os.listdir(folder)) == 0:
+        os.rmdir(folder)
+    elif moved == 0:
+        pass
+    else:
+        print("Moved in total {} file(s) to {}.".format(moved, folder))
+
+
+# Getting into the Downloads folder
 os.chdir(os.path.expanduser("~") + os.sep + "Downloads")
 
 
-#Creating lists for the file-types.
-vids = ['.mp4','.mkv','.avi','.mpg','.mov','.wmv']
-pics = ['.gif','.jpg','.png']
-sounds = ['.aac', '.mp3','.wma' ,'.wav']
-compressed = ['.zip','.rar','.tar','.tar.gz','.tgz','.bz','.z','.tgz','.tar.bz2']
-books = ['.pdf','.epub']
-fileTypes = [vids,pics,sounds,compressed,books]
+# Creating lists for the file formats and folders
+vids = ['.mp4', '.mkv', '.avi', '.mpg', '.mov', '.wmv', '.webm', '.mp2', '.mpeg', '.mpe', '.mpv', '.m4p', '.m4v', '.mov']
+pics = ['.gif', '.jpg', '.png', '.tif', '.tiff', '.webp', '.psd', '.raw', '.arw', '.cr2', '.nrw', '.k25', '.svg']
+audio = ['.mp3', '.aac', '.wav', '.flac', '.alac', '.dsd', '.aif', '.cda', '.mid', '.midi', '.mpa', '.wpl' ]
+compressed = ['.7z', '.arj', '.deb', '.pkg', '.rar', '.rpm', '.tar.gz', '.z', 'zip']
+discMedia = ['.dmg', '.iso', '.toast', '.vcd']
+email = ['.email', '.eml', 'emlx', '.msg', '.oft', '.ost', '.pst', '.vcf']
+executable = ['.apk', '.bat', '.bin', '.cgi', '.pl', '.com', '.exe', '.gadget', '.jar', '.msi', '.py', '.wsf']
+wordProcessor = ['.doc', '.docx', '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd']
 
-#Lists for putting the correct files in.
-vidsList = []
-picsList = []
-soundsList = []
-compressedList = []
-booksList = []
-lists = [vidsList,picsList,soundsList,compressedList,booksList]
+folderConjunction = {
+    'Vids': vids, 'Pics': pics, 'Audio': audio, 'Compressed': compressed, 'DiscMedia': discMedia,
+    'Email': email, 'Executables': executable, 'wordProcessor': wordProcessor
+}
 
-
-
-#Creating directories if necessary.
-def Directories(Type):
-	if os.path.isdir(Type):
-		print "-Directory '%s' already exists." % Type
-	else:
-		print "Creating directory '%s'..." % Type
-		os.mkdir(Type)
-
-
-
-
-#Getting the files.
-def getFiles(Type,List):
-	for file in os.listdir(os.getcwd()):
-		for item in Type:
-			if file.endswith(item):
-				List.append(file)
-
-
-
-#Showing and moving the files.
-def Move(List,folder):
-	moved = 0
-	for item in List:
-		print "Moving %r to %r..." % (item,folder)
- 		shutil.move(item,folder)
- 		time.sleep(0.1)
- 		moved += 1
- 	if moved == 0:
- 		print "No items needed to be moved."
- 		time.sleep(3)
-
-def Final():
-	folders = ['Vids','Pics','Sounds','Compressed','Books']
-	for i in range(len(folders)):
-		Directories(folders[i])
-		getFiles(fileTypes[i],lists[i])
-		Move(lists[i],folders[i])
-
-Final()
+# loop
+for i in folderConjunction:
+    main(folderConjunction[i], i)
