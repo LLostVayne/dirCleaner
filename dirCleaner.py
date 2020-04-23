@@ -26,7 +26,7 @@ os.chdir(os.path.expanduser("~") + os.sep + "Downloads")
 
 # Creating lists for the file formats and folders
 vids = ['.mp4', '.mkv', '.avi', '.mpg', '.mov', '.wmv', '.webm', '.mp2', '.mpeg', '.mpe', '.mpv', '.m4p', '.m4v', '.mov']
-pics = ['.gif', '.jpg', '.png', '.tif', '.tiff', '.webp', '.psd', '.raw', '.arw', '.cr2', '.nrw', '.k25', '.svg']
+pics = ['.gif', '.jpg', '.jpeg', '.png', '.tif', '.tiff', '.webp', '.psd', '.raw', '.arw', '.cr2', '.nrw', '.k25', '.svg']
 audio = ['.mp3', '.aac', '.wav', '.flac', '.alac', '.dsd', '.aif', '.cda', '.mid', '.midi', '.mpa', '.wpl' ]
 compressed = ['.7z', '.arj', '.deb', '.pkg', '.rar', '.rpm', '.tar.gz', '.z', 'zip']
 discMedia = ['.dmg', '.iso', '.toast', '.vcd']
